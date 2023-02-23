@@ -2,9 +2,15 @@
 def find(m,palabra):
      for i in m:              #i = columnas 
           i = "".join(i)
-          print(i)
           if palabra in i:
                return True
+     else:
+          i = 0 #si no es True reseteas i para el proximo ciclo
+          for i in range(len(m)):
+               j = "".join([col[i] for col in m])
+               if palabra in j:
+                    return True
+          
 
 
 

@@ -1,3 +1,11 @@
+# functions
+def find(m,palabra):
+     for i in m:              #i = columnas 
+          i = "".join(i)
+          print(i)
+          if palabra in i:
+               return True
+
 
 
 #main----------------------------------------------------------------------------
@@ -11,4 +19,7 @@ m = [['E','L','E','F','A','N','T','E'],
      ['O','W','A','L','I','H','J','P'],
      ['L','S','E','N','O','T','A','R']]
 
-print(m)
+palabra = input('ingresa la palabra encontrada: ').upper()
+solucion = find(m,palabra)
+print(solucion)
+#print(solucion)

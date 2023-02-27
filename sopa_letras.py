@@ -1,29 +1,33 @@
 # functions
 def find(m,palabra):
-      for i in m: #i = columnas, va interando columna por columna
-          i = "".join(i)
-          if palabra in i:
+     # Comprobar horizontalmente al derecho y al revez
+     for fila in m:
+          if palabra in ''.join(fila) or palabra in ''.join(fila[::-1]):
+               print("Palabra encontrada en horizontal")
                return True
-          else:
-               i = 0 #si no es True reseteas i para el proximo ciclo
-               for i in range(len(m)):
-                    j = "".join([col[i] for col in m])
-                    if palabra in j:
-                         return True
 
-# functions
-def findneg(m,palabra):
-      for i in m: #i = columnas, va interando columna por columna
-          i = "".join(i)
-          if palabra[::-1] in i:
+     # Comprobar verticalmente hacia arriba o hacia abajo
+     for col in range(len(m[0])):
+          if palabra in ''.join([fila[col] for fila in m]) or palabra in ''.join([fila[col] for fila in m][::-1]):
+               print("Palabra encontrada en vertical")
                return True
-          else:
-               i = 0 #si no es True reseteas i para el proximo ciclo
-               for i in range(len(m)):
-                    j = "".join([col[i] for col in m])
-                    if palabra[::-1] in j:
-                         return True
 
+     # Guarda todas las diagonales
+     diags = []
+     for i in range(len(m)):
+          diags.append([m[i + j][j] for j in range(len(m) - i)]) # Diagonal principal hacia abajo
+          diags.append([m[j][i + j] for j in range(len(m) - i)]) # Diagonal principal hacia arriba
+          diags.append([m[len(m) - 1 - i - j][j] for j in range(len(m) - i)]) #Diagonal secundaria hacia arriba
+          diags.append([m[len(m) - 1 - j][i + j] for j in range(len(m) - i)]) #Diagonal secundaria hacia abajo
+     
+     # Comprueba en todas las diagonales guardadas
+     for diag in diags:
+          if palabra in ''.join(diag) or palabra in ''.join(diag[::-1]):
+               print("Palabra encontrada en diagonal")
+               return True
+     
+     print("Palabra no encontrada")
+     return False
 
 
 #main----------------------------------------------------------------------------
@@ -37,14 +41,9 @@ m = [['E','L','E','F','A','N','T','E'], #ELEFANTE, JIRAFA, TORTUGA
      ['O','O','A','L','I','H','J','P'],
      ['T','S','E','N','O','T','A','R']]
 
-palabra = input('ingresa la palabra encontrada: ').upper()
 #El programa pedira palabras a encontrar hasta que el usuario ingrese ENTER(una cadena vacia)
+palabra = input('ingresa la palabra encontrada: ').upper()
 while palabra != "":
-     solucion = findneg(m,palabra)
-     if solucion == True:
-          print(solucion)
-     else:
-          solucion = find(m,palabra)
-          print(solucion)
+     solucion = find(m,palabra)
+     print(solucion)
      palabra = input('ingresa la palabra encontrada: ').upper()
-#print(solucion)

@@ -47,5 +47,4 @@ while palabra != "":
           solucion = find(m,palabra)
           print(solucion)
      palabra = input('ingresa la palabra encontrada: ').upper()
-print(solucion)
 #print(solucion)
